@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
-import { ShieldIcon, UserRoundIcon } from "lucide-react"
+import { GraduationCapIcon, ShieldIcon, UserRoundIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,14 +17,27 @@ import {
 } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/shared/auth/auth-context"
-import type { UserRole } from "@/shared/auth/types"
+import { hubPathForRole, type UserRole } from "@/shared/auth/types"
 import { MOCK_PASSWORD } from "@/shared/data/mock-users"
 
-type PortalRole = Extract<UserRole, "admin" | "participant">
+type PortalRole = Extract<UserRole, "admin" | "participant" | "mentor">
 
 const DEMO_EMAILS: Record<PortalRole, string> = {
   admin: "admin@aaiiri.org",
   participant: "participant@aaiiri.org",
+  mentor: "mentor@aaiiri.org",
+}
+
+const ROLE_LABELS: Record<PortalRole, string> = {
+  admin: "Admin",
+  participant: "Participant",
+  mentor: "Mentor",
+}
+
+const ROLE_PROMISE: Record<PortalRole, string> = {
+  admin: "Grade work, allocate mentors, keep the programme moving.",
+  participant: "See what’s due, submit evidence, meet your mentor.",
+  mentor: "Guide mentees, log sessions, submit development reports.",
 }
 
 export function LoginForm({
@@ -33,13 +46,15 @@ export function LoginForm({
 }: React.ComponentProps<"form">) {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [role, setRole] = React.useState<PortalRole>("admin")
-  const [email, setEmail] = React.useState(DEMO_EMAILS.admin)
+  const [role, setRole] = React.useState<PortalRole>("participant")
+  const [email, setEmail] = React.useState(DEMO_EMAILS.participant)
   const [password, setPassword] = React.useState(MOCK_PASSWORD)
   const [error, setError] = React.useState<string | null>(null)
 
   function handleRoleChange(value: string) {
-    if (value !== "admin" && value !== "participant") return
+    if (value !== "admin" && value !== "participant" && value !== "mentor") {
+      return
+    }
     setRole(value)
     setEmail(DEMO_EMAILS[value])
     setError(null)
@@ -55,8 +70,8 @@ export function LoginForm({
     }
 
     setError(null)
-    toast.success(`Welcome back — signed in as ${role}`)
-    navigate(role === "admin" ? "/admin" : "/participant")
+    toast.success(`Welcome — continuing as ${ROLE_LABELS[role]}`)
+    navigate(hubPathForRole(role))
   }
 
   return (
@@ -66,34 +81,33 @@ export function LoginForm({
       {...props}
     >
       <FieldGroup className="gap-6">
-        <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="font-heading text-3xl font-bold tracking-tight">
-            Login to your account
-          </h1>
-          <p className="text-base text-balance text-muted-foreground">
-            Choose your role, then sign in to the AAIIRI platform
+        <div className="flex flex-col gap-2">
+          <h1 className="font-heading text-2xl font-semibold">Sign in</h1>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {ROLE_PROMISE[role]}
           </p>
         </div>
 
         <Field>
-          <FieldLabel className="text-sm">Login as</FieldLabel>
+          <FieldLabel>I am a…</FieldLabel>
           <ToggleGroup
             type="single"
             value={role}
             onValueChange={handleRoleChange}
             variant="outline"
-            className="h-11 w-full"
+            className="grid w-full grid-cols-3"
           >
-            <ToggleGroupItem value="admin" className="h-11 flex-1 gap-2 text-sm">
-              <ShieldIcon />
-              Admin
+            <ToggleGroupItem value="participant" className="gap-1.5 px-2">
+              <UserRoundIcon className="size-3.5" />
+              Learner
             </ToggleGroupItem>
-            <ToggleGroupItem
-              value="participant"
-              className="h-11 flex-1 gap-2 text-sm"
-            >
-              <UserRoundIcon />
-              Participant
+            <ToggleGroupItem value="mentor" className="gap-1.5 px-2">
+              <GraduationCapIcon className="size-3.5" />
+              Mentor
+            </ToggleGroupItem>
+            <ToggleGroupItem value="admin" className="gap-1.5 px-2">
+              <ShieldIcon className="size-3.5" />
+              Admin
             </ToggleGroupItem>
           </ToggleGroup>
           <FieldDescription>
@@ -130,7 +144,7 @@ export function LoginForm({
                 toast.message("Password reset is mocked in this frontend.")
               }}
             >
-              Forgot your password?
+              Forgot password?
             </a>
           </div>
           <Input
@@ -150,8 +164,8 @@ export function LoginForm({
         </Field>
 
         <Field>
-          <Button type="submit" size="lg" className="h-11 w-full text-base">
-            Login as {role === "admin" ? "Admin" : "Participant"}
+          <Button type="submit" className="h-11 w-full text-base" size="lg">
+            Continue as {ROLE_LABELS[role]}
           </Button>
         </Field>
       </FieldGroup>

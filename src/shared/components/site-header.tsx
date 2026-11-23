@@ -1,32 +1,26 @@
-import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
 import { HeaderUser } from "@/shared/components/header-user"
 import { ThemeToggle } from "@/shared/components/theme-toggle"
 
-export function SiteHeader({ title }: { title: string }) {
+export function SiteHeader({
+  title,
+  subtitle,
+}: {
+  title: string
+  subtitle?: string
+}) {
   return (
-    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
-      <div className="flex min-w-0 flex-1 items-center gap-2">
+    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-3 border-b border-foreground/8 bg-background/75 px-4 backdrop-blur-md md:px-6">
+      <div className="flex min-w-0 flex-1 items-center gap-3">
         <SidebarTrigger className="-ml-1" />
-        <Separator
-          orientation="vertical"
-          className="mr-1 data-vertical:h-4 data-vertical:self-auto"
-        />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbPage className="truncate font-medium">
-                {title}
-              </BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <div className="min-w-0">
+          <p className="truncate font-heading text-lg font-medium leading-tight">
+            {title}
+          </p>
+          {subtitle ? (
+            <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
+          ) : null}
+        </div>
       </div>
       <div className="flex shrink-0 items-center gap-1.5">
         <ThemeToggle />

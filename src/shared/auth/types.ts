@@ -1,4 +1,4 @@
-export type UserRole = "admin" | "participant" | "applicant"
+export type UserRole = "admin" | "participant" | "applicant" | "mentor"
 
 export type AuthUser = {
   id: string
@@ -8,4 +8,17 @@ export type AuthUser = {
   avatar?: string
   title?: string
   organization?: string
+}
+
+export function hubPathForRole(role: UserRole): string {
+  switch (role) {
+    case "admin":
+      return "/admin"
+    case "mentor":
+      return "/mentor"
+    case "participant":
+      return "/participant"
+    case "applicant":
+      return "/apply/status"
+  }
 }

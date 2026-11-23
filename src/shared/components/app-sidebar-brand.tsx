@@ -1,4 +1,3 @@
-import { LeafIcon } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import {
@@ -16,19 +15,23 @@ export function AppSidebarBrand({
   subtitle: string
 }) {
   return (
-    <SidebarHeader className="h-16 justify-center border-b border-sidebar-border px-2 py-0">
+    <SidebarHeader className="h-16 justify-center border-b border-sidebar-border p-2">
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" className="h-12" asChild>
             <NavLink to={to}>
-              <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <LeafIcon className="size-5" />
+              <div className="relative flex aspect-square size-9 items-center justify-center overflow-hidden rounded-md bg-sidebar-primary text-sm font-bold text-sidebar-primary-foreground">
+                A
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-1 bg-white/50"
+                />
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-left leading-tight">
                 <span className="truncate font-heading text-base font-semibold">
                   AAIIRI
                 </span>
-                <span className="truncate text-xs text-muted-foreground">
+                <span className="truncate text-[0.65rem] tracking-[0.14em] text-sidebar-foreground/65 uppercase">
                   {subtitle}
                 </span>
               </div>
