@@ -1,10 +1,19 @@
 import {
+  AwardIcon,
   BookOpenIcon,
+  BriefcaseBusinessIcon,
+  Building2Icon,
   CalendarDaysIcon,
   ChartColumnIcon,
+  ClipboardCheckIcon,
   ClipboardListIcon,
+  FileSpreadsheetIcon,
+  GraduationCapIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
+  MessagesSquareIcon,
+  PenLineIcon,
+  UserCheckIcon,
   UsersIcon,
 } from "lucide-react"
 
@@ -54,12 +63,84 @@ const sections: SidebarNavSection[] = [
     ],
   },
   {
-    label: "Engagement",
+    label: "Assessment",
     items: [
       {
-        title: "Matchmaking",
+        title: "Assessments",
+        url: "/admin/assessments",
+        icon: FileSpreadsheetIcon,
+      },
+      {
+        title: "Assignments",
+        url: "/admin/assignments",
+        icon: ClipboardCheckIcon,
+      },
+      { title: "Grading", url: "/admin/grading", icon: PenLineIcon },
+      {
+        title: "Performance",
+        url: "/admin/performance",
+        icon: ChartColumnIcon,
+      },
+    ],
+  },
+  {
+    label: "Mentorship",
+    items: [
+      { title: "Mentors", url: "/admin/mentors", icon: GraduationCapIcon },
+      {
+        title: "Allocations",
+        url: "/admin/allocations",
+        icon: UserCheckIcon,
+      },
+      {
+        title: "Sessions",
+        url: "/admin/mentorship-sessions",
+        icon: MessagesSquareIcon,
+      },
+      {
+        title: "Reports",
+        url: "/admin/mentor-reports",
+        icon: ClipboardListIcon,
+      },
+    ],
+  },
+  {
+    label: "Matchmaking",
+    items: [
+      {
+        title: "Partners",
+        url: "/admin/partners",
+        icon: BriefcaseBusinessIcon,
+      },
+      {
+        title: "Enterprises",
+        url: "/admin/enterprises",
+        icon: Building2Icon,
+      },
+      {
+        title: "Pipeline",
         url: "/admin/matchmaking",
         icon: HandshakeIcon,
+      },
+      {
+        title: "Meetings",
+        url: "/admin/match-meetings",
+        icon: CalendarDaysIcon,
+      },
+      {
+        title: "Outcomes",
+        url: "/admin/match-outcomes",
+        icon: ClipboardCheckIcon,
+      },
+    ],
+  },
+  {
+    label: "Recognition",
+    items: [
+      {
+        title: "Certification",
+        url: "/admin/certification",
+        icon: AwardIcon,
       },
     ],
   },
