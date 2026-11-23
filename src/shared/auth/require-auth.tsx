@@ -1,0 +1,24 @@
+import { Navigate, Outlet, useLocation } from "react-router-dom"
+
+import { useAuth } from "@/shared/auth/auth-context"
+import type { UserRole } from "@/shared/auth/types"
+
+export function RequireAuth({ role }: { role: UserRole }) {
+  const { user, isAuthenticated } = useAuth()
+  const location = useLocation()
+
+  if (!isAuthenticated || !user) {
+    return <Navigate to="/login" replace state={{ from: location }} />
+  }
+
+  if (user.role !== role) {
+    return (
+      <Navigate
+        to={user.role === "admin" ? "/admin" : "/participant"}
+        replace
+      />
+    )
+  }
+
+  return <Outlet />
+}
