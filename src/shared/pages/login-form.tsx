@@ -20,19 +20,21 @@ import { useAuth } from "@/shared/auth/auth-context"
 import { hubPathForRole, type UserRole } from "@/shared/auth/types"
 import { MOCK_PASSWORD } from "@/shared/data/mock-users"
 
-const DEMO_EMAILS: Record<UserRole, string> = {
+type PortalRole = Extract<UserRole, "admin" | "participant" | "mentor">
+
+const DEMO_EMAILS: Record<PortalRole, string> = {
   admin: "admin@aaiiri.org",
   participant: "participant@aaiiri.org",
   mentor: "mentor@aaiiri.org",
 }
 
-const ROLE_LABELS: Record<UserRole, string> = {
+const ROLE_LABELS: Record<PortalRole, string> = {
   admin: "Admin",
   participant: "Participant",
   mentor: "Mentor",
 }
 
-const ROLE_PROMISE: Record<UserRole, string> = {
+const ROLE_PROMISE: Record<PortalRole, string> = {
   admin: "Grade work, allocate mentors, keep the programme moving.",
   participant: "See what’s due, submit evidence, meet your mentor.",
   mentor: "Guide mentees, log sessions, submit development reports.",
@@ -44,7 +46,7 @@ export function LoginForm({
 }: React.ComponentProps<"form">) {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [role, setRole] = React.useState<UserRole>("participant")
+  const [role, setRole] = React.useState<PortalRole>("participant")
   const [email, setEmail] = React.useState(DEMO_EMAILS.participant)
   const [password, setPassword] = React.useState(MOCK_PASSWORD)
   const [error, setError] = React.useState<string | null>(null)
@@ -78,7 +80,7 @@ export function LoginForm({
       onSubmit={handleSubmit}
       {...props}
     >
-      <FieldGroup>
+      <FieldGroup className="gap-6">
         <div className="flex flex-col gap-2">
           <h1 className="font-heading text-2xl font-semibold">Sign in</h1>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -114,11 +116,14 @@ export function LoginForm({
         </Field>
 
         <Field data-invalid={error ? true : undefined}>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel htmlFor="email" className="text-sm">
+            Email
+          </FieldLabel>
           <Input
             id="email"
             type="email"
             placeholder="m@example.com"
+            className="h-11 px-3 text-base md:text-base"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             aria-invalid={error ? true : undefined}
@@ -128,7 +133,9 @@ export function LoginForm({
 
         <Field data-invalid={error ? true : undefined}>
           <div className="flex items-center">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <FieldLabel htmlFor="password" className="text-sm">
+              Password
+            </FieldLabel>
             <a
               href="#"
               className="ml-auto text-sm underline-offset-4 hover:underline"
@@ -143,6 +150,7 @@ export function LoginForm({
           <Input
             id="password"
             type="password"
+            className="h-11 px-3 text-base md:text-base"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             aria-invalid={error ? true : undefined}
@@ -156,7 +164,7 @@ export function LoginForm({
         </Field>
 
         <Field>
-          <Button type="submit" className="w-full" size="lg">
+          <Button type="submit" className="h-11 w-full text-base" size="lg">
             Continue as {ROLE_LABELS[role]}
           </Button>
         </Field>

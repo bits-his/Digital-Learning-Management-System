@@ -8,7 +8,13 @@ export function RequireAuth({ role }: { role: UserRole }) {
   const location = useLocation()
 
   if (!isAuthenticated || !user) {
-    return <Navigate to="/login" replace state={{ from: location }} />
+    return (
+      <Navigate
+        to={role === "applicant" ? "/apply/login" : "/login"}
+        replace
+        state={{ from: location }}
+      />
+    )
   }
 
   if (user.role !== role) {

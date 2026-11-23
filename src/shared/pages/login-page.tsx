@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 import { BrandMark } from "@/shared/components/brand-mark"
 import { useAuth } from "@/shared/auth/auth-context"
@@ -59,6 +59,15 @@ export function LoginPage() {
         <div className="story-enter-delay w-full max-w-md lg:flex-none">
           <div className="rounded-2xl border border-white/20 bg-background/95 p-6 shadow-none backdrop-blur-md md:p-8">
             <LoginForm />
+            <p className="mt-5 text-center text-sm text-muted-foreground">
+              Applying to the Bootcamp?{" "}
+              <Link
+                to="/apply"
+                className="font-medium text-foreground underline underline-offset-4"
+              >
+                Apply to Bootcamp
+              </Link>
+            </p>
           </div>
           <p className="mt-4 text-center text-xs text-white/60">
             Frontend prototype — demo accounts only, no live backend yet.

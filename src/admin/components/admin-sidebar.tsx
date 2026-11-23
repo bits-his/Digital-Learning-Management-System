@@ -8,11 +8,15 @@ import {
   ClipboardCheckIcon,
   ClipboardListIcon,
   FileSpreadsheetIcon,
+  GavelIcon,
   GraduationCapIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
+  ListChecksIcon,
   MessagesSquareIcon,
   PenLineIcon,
+  ScaleIcon,
+  TimerIcon,
   UserCheckIcon,
   UsersIcon,
 } from "lucide-react"
@@ -47,6 +51,26 @@ const sections: SidebarNavSection[] = [
         title: "Applications",
         url: "/admin/applications",
         icon: ClipboardListIcon,
+      },
+      {
+        title: "Criteria",
+        url: "/admin/selection/criteria",
+        icon: ListChecksIcon,
+      },
+      {
+        title: "Deadlines",
+        url: "/admin/selection/deadlines",
+        icon: TimerIcon,
+      },
+      {
+        title: "Decisions",
+        url: "/admin/selection/decisions",
+        icon: ScaleIcon,
+      },
+      {
+        title: "Audit trail",
+        url: "/admin/selection/audit",
+        icon: GavelIcon,
       },
       {
         title: "Enrolment",

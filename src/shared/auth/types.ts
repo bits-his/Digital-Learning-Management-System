@@ -1,4 +1,4 @@
-export type UserRole = "admin" | "participant" | "mentor"
+export type UserRole = "admin" | "participant" | "applicant" | "mentor"
 
 export type AuthUser = {
   id: string
@@ -18,5 +18,7 @@ export function hubPathForRole(role: UserRole): string {
       return "/mentor"
     case "participant":
       return "/participant"
+    case "applicant":
+      return "/apply/status"
   }
 }

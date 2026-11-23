@@ -13,6 +13,22 @@ const titles: Record<string, { title: string; subtitle: string }> = {
     title: "Applications",
     subtitle: "Selection pipeline",
   },
+  "/admin/selection/criteria": {
+    title: "Scoring criteria",
+    subtitle: "How applications are scored",
+  },
+  "/admin/selection/deadlines": {
+    title: "Deadlines",
+    subtitle: "Intake windows",
+  },
+  "/admin/selection/decisions": {
+    title: "Decisions",
+    subtitle: "Approve, waitlist, or reject",
+  },
+  "/admin/selection/audit": {
+    title: "Audit trail",
+    subtitle: "Selection activity log",
+  },
   "/admin/enrolment": {
     title: "Enrolment",
     subtitle: "Allocate cohorts and activate accounts",
@@ -81,6 +97,12 @@ function resolveMeta(pathname: string) {
     return {
       title: "Course curriculum",
       subtitle: "Modules, lessons & cohort access",
+    }
+  }
+  if (pathname.startsWith("/admin/applications/")) {
+    return {
+      title: "Application review",
+      subtitle: "Score, decide, and record notes",
     }
   }
   return (

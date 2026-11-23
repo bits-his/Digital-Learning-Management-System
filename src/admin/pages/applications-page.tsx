@@ -1,4 +1,5 @@
-import { toast } from "sonner"
+import { Link } from "react-router-dom"
+import * as React from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -9,49 +10,94 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { adminApplications } from "@/shared/data/mock-admin"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useApplications } from "@/shared/data/applications/applications-context"
+import type { ApplicationStatus } from "@/shared/data/applications/types"
 
 export function AdminApplicationsPage() {
+  const { state, weightedScore } = useApplications()
+  const [status, setStatus] = React.useState<string>("all")
+
+  const filtered = state.applications.filter((app) =>
+    status === "all" ? true : app.status === status
+  )
+
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">Applications</h1>
-        <p className="text-sm text-muted-foreground">
-          Review and shortlist Bootcamp applicants.
-        </p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h1 className="font-heading text-2xl font-semibold">
+            Application review
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Screen, score, and progress applicants through selection.
+          </p>
+        </div>
+        <Select value={status} onValueChange={setStatus}>
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Filter status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="all">All statuses</SelectItem>
+              {(
+                [
+                  "draft",
+                  "submitted",
+                  "under_review",
+                  "shortlisted",
+                  "waitlisted",
+                  "approved",
+                  "rejected",
+                ] as ApplicationStatus[]
+              ).map((value) => (
+                <SelectItem key={value} value={value}>
+                  {value.replaceAll("_", " ")}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
+
       <div className="flex flex-col gap-3">
-        {adminApplications.map((app) => (
-          <Card key={app.id}>
-            <CardHeader className="flex-row items-start justify-between gap-4 space-y-0">
-              <div className="flex flex-col gap-1">
-                <CardTitle className="text-base">{app.business}</CardTitle>
-                <CardDescription>
-                  {app.id} · {app.country} · {app.sector}
-                </CardDescription>
-              </div>
-              <Badge variant="secondary">{app.status}</Badge>
-            </CardHeader>
-            <CardContent className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-sm text-muted-foreground">Score: {app.score}</p>
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => toast.message(`Waiting list: ${app.id}`)}
-                >
-                  Waitlist
+        {filtered.map((app) => {
+          const score = weightedScore(app)
+          return (
+            <Card key={app.id}>
+              <CardHeader className="flex-row items-start justify-between gap-4">
+                <div>
+                  <CardTitle className="text-base">
+                    {app.business.businessName || app.personal.fullName}
+                  </CardTitle>
+                  <CardDescription>
+                    {app.id} · {app.business.country || "—"} ·{" "}
+                    {app.business.sector || "—"}
+                  </CardDescription>
+                </div>
+                <Badge className="capitalize" variant="secondary">
+                  {app.status.replaceAll("_", " ")}
+                </Badge>
+              </CardHeader>
+              <CardContent className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm text-muted-foreground">
+                  Applicant: {app.personal.fullName}
+                  {score !== null ? ` · Score ${score}/100` : " · Not scored"}
+                </p>
+                <Button size="sm" asChild>
+                  <Link to={`/admin/applications/${app.id}`}>Open review</Link>
                 </Button>
-                <Button
-                  size="sm"
-                  onClick={() => toast.success(`Shortlisted ${app.id}`)}
-                >
-                  Shortlist
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
     </div>
   )

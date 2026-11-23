@@ -6,6 +6,7 @@ import App from "./App.tsx"
 import { ThemeProvider } from "@/components/theme-provider.tsx"
 import { Toaster } from "@/components/ui/sonner"
 import { AuthProvider } from "@/shared/auth/auth-context"
+import { ApplicationsProvider } from "@/shared/data/applications/applications-context"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 createRoot(document.getElementById("root")!).render(
@@ -13,8 +14,10 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <TooltipProvider>
         <AuthProvider>
-          <App />
-          <Toaster />
+          <ApplicationsProvider>
+            <App />
+            <Toaster />
+          </ApplicationsProvider>
         </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
