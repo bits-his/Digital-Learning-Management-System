@@ -5,7 +5,9 @@ import {
   ClipboardCheckIcon,
   GaugeIcon,
   LayoutDashboardIcon,
+  RouteIcon,
   UserRoundIcon,
+  CalendarRangeIcon,
 } from "lucide-react"
 
 import {
@@ -29,6 +31,11 @@ const sections: SidebarNavSection[] = [
         icon: LayoutDashboardIcon,
         end: true,
       },
+      {
+        title: "Onboarding",
+        url: "/participant/onboarding",
+        icon: RouteIcon,
+      },
     ],
   },
   {
@@ -38,6 +45,11 @@ const sections: SidebarNavSection[] = [
         title: "My courses",
         url: "/participant/courses",
         icon: BookOpenIcon,
+      },
+      {
+        title: "Timetable",
+        url: "/participant/timetable",
+        icon: CalendarRangeIcon,
       },
       {
         title: "Live sessions",
