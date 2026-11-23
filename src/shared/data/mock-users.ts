@@ -23,6 +23,16 @@ export const mockUsers: AuthUser[] = [
     avatar:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face",
   },
+  {
+    id: "mentor-1",
+    name: "Amina Diallo",
+    email: "mentor@aaiiri.org",
+    role: "mentor",
+    title: "Investment Advisor",
+    organization: "WestBridge Advisory",
+    avatar:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&crop=face",
+  },
 ]
 
 export function findMockUser(email: string, role: AuthUser["role"]) {
