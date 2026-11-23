@@ -7,6 +7,10 @@ import { SiteHeader } from "@/shared/components/site-header"
 const titles: Record<string, string> = {
   "/admin": "Dashboard",
   "/admin/applications": "Applications",
+  "/admin/selection/criteria": "Scoring criteria",
+  "/admin/selection/deadlines": "Deadlines",
+  "/admin/selection/decisions": "Decisions",
+  "/admin/selection/audit": "Audit trail",
   "/admin/cohorts": "Cohorts",
   "/admin/courses": "Courses",
   "/admin/sessions": "Live sessions",
@@ -16,7 +20,11 @@ const titles: Record<string, string> = {
 
 export function AdminLayout() {
   const { pathname } = useLocation()
-  const title = titles[pathname] ?? "Admin"
+  const title =
+    titles[pathname] ??
+    (pathname.startsWith("/admin/applications/")
+      ? "Application review"
+      : "Admin")
 
   return (
     <SidebarProvider>

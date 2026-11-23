@@ -3,8 +3,12 @@ import {
   CalendarDaysIcon,
   ChartColumnIcon,
   ClipboardListIcon,
+  GavelIcon,
   HandshakeIcon,
   LayoutDashboardIcon,
+  ListChecksIcon,
+  ScaleIcon,
+  TimerIcon,
   UsersIcon,
 } from "lucide-react"
 
@@ -38,6 +42,26 @@ const sections: SidebarNavSection[] = [
         title: "Applications",
         url: "/admin/applications",
         icon: ClipboardListIcon,
+      },
+      {
+        title: "Criteria",
+        url: "/admin/selection/criteria",
+        icon: ListChecksIcon,
+      },
+      {
+        title: "Deadlines",
+        url: "/admin/selection/deadlines",
+        icon: TimerIcon,
+      },
+      {
+        title: "Decisions",
+        url: "/admin/selection/decisions",
+        icon: ScaleIcon,
+      },
+      {
+        title: "Audit trail",
+        url: "/admin/selection/audit",
+        icon: GavelIcon,
       },
       { title: "Cohorts", url: "/admin/cohorts", icon: UsersIcon },
     ],

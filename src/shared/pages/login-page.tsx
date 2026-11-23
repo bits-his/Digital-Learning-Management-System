@@ -1,19 +1,20 @@
-import { Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 import { BrandMark } from "@/shared/components/brand-mark"
 import { useAuth } from "@/shared/auth/auth-context"
 import { LoginForm } from "@/shared/pages/login-form"
 
+function homeForRole(role: string) {
+  if (role === "admin") return "/admin"
+  if (role === "participant") return "/participant"
+  return "/apply/status"
+}
+
 export function LoginPage() {
   const { user, isAuthenticated } = useAuth()
 
   if (isAuthenticated && user) {
-    return (
-      <Navigate
-        to={user.role === "admin" ? "/admin" : "/participant"}
-        replace
-      />
-    )
+    return <Navigate to={homeForRole(user.role)} replace />
   }
 
   return (
@@ -23,8 +24,17 @@ export function LoginPage() {
           <BrandMark to="/login" />
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
+          <div className="flex w-full max-w-md flex-col gap-5">
             <LoginForm />
+            <p className="text-center text-base text-muted-foreground">
+              Applying to the Bootcamp?{" "}
+              <Link
+                to="/apply"
+                className="font-medium text-foreground underline underline-offset-4"
+              >
+                Apply to Bootcamp
+              </Link>
+            </p>
           </div>
         </div>
       </div>
