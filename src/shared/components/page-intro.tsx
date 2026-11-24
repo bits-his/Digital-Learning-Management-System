@@ -1,7 +1,11 @@
 import type { ReactNode } from "react"
 
-import { cn } from "@/lib/utils"
+import { PageHeader } from "@/shared/components/page-layout"
 
+/**
+ * Narrative page header used on dashboards and hubs.
+ * Prefer `PageLayout variant="story"` for new pages.
+ */
 export function PageIntro({
   eyebrow,
   title,
@@ -16,26 +20,13 @@ export function PageIntro({
   className?: string
 }) {
   return (
-    <div
-      className={cn(
-        "story-enter flex flex-col gap-4 border-b border-foreground/10 pb-6 md:flex-row md:items-end md:justify-between",
-        className
-      )}
-    >
-      <div className="max-w-2xl space-y-2">
-        {eyebrow ? (
-          <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">
-            {eyebrow}
-          </p>
-        ) : null}
-        <h1 className="font-heading text-3xl font-semibold text-balance md:text-4xl">
-          {title}
-        </h1>
-        <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-          {description}
-        </p>
-      </div>
-      {action ? <div className="shrink-0">{action}</div> : null}
-    </div>
+    <PageHeader
+      variant="story"
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      actions={action}
+      className={className}
+    />
   )
 }

@@ -12,18 +12,17 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/shared/auth/auth-context"
+import { PageLayout } from "@/shared/components/page-layout"
 
 export function ParticipantProfilePage() {
   const { user } = useAuth()
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">Business profile</h1>
-        <p className="text-sm text-muted-foreground">
-          Shared with mentors and partners only after you consent.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Business profile"
+      description="Shared with mentors and partners only after you consent."
+    >
       <Card className="max-w-xl">
         <CardHeader>
           <CardTitle>{user?.organization ?? "Your business"}</CardTitle>
@@ -62,6 +61,6 @@ export function ParticipantProfilePage() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </PageLayout>
   )
 }

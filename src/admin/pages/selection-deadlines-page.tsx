@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 
 function toLocalInput(iso: string) {
@@ -38,15 +39,11 @@ export function AdminSelectionDeadlinesPage() {
   const open = Date.now() <= new Date(state.deadline.closeAt).getTime()
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">
-          Application deadlines
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Manage the application window for the Bootcamp intake.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Deadlines"
+      description="Manage the application window for the Bootcamp intake."
+    >
 
       <Alert>
         <AlertTitle>{open ? "Window open" : "Window closed"}</AlertTitle>
@@ -105,6 +102,6 @@ export function AdminSelectionDeadlinesPage() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </PageLayout>
   )
 }

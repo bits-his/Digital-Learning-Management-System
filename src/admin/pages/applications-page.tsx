@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 import type { ApplicationStatus } from "@/shared/data/applications/types"
 
@@ -30,16 +31,11 @@ export function AdminApplicationsPage() {
   )
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="font-heading text-2xl font-semibold">
-            Application review
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Screen, score, and progress applicants through selection.
-          </p>
-        </div>
+    <PageLayout
+      variant="standard"
+      title="Applications"
+      description="Screen, score, and progress applicants through selection."
+      actions={
         <Select value={status} onValueChange={setStatus}>
           <SelectTrigger className="w-48">
             <SelectValue placeholder="Filter status" />
@@ -65,8 +61,8 @@ export function AdminApplicationsPage() {
             </SelectGroup>
           </SelectContent>
         </Select>
-      </div>
-
+      }
+    >
       <div className="flex flex-col gap-3">
         {filtered.map((app) => {
           const score = weightedScore(app)
@@ -99,6 +95,6 @@ export function AdminApplicationsPage() {
           )
         })}
       </div>
-    </div>
+    </PageLayout>
   )
 }

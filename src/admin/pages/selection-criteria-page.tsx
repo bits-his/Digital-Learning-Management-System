@@ -12,6 +12,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 import type { ScoringCriterion } from "@/shared/data/applications/types"
 
@@ -28,15 +29,11 @@ export function AdminSelectionCriteriaPage() {
   const totalWeight = criteria.reduce((sum, item) => sum + item.weight, 0)
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">
-          Scoring criteria
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Configure weighted assessment criteria for selection.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Scoring criteria"
+      description="Configure weighted assessment criteria for selection."
+    >
       <Card>
         <CardHeader>
           <CardTitle className="text-base">Rubric weights</CardTitle>
@@ -104,6 +101,6 @@ export function AdminSelectionCriteriaPage() {
           <Button onClick={() => updateCriteria(criteria)}>Save criteria</Button>
         </CardFooter>
       </Card>
-    </div>
+    </PageLayout>
   )
 }

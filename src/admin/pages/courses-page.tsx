@@ -25,6 +25,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useEnrolment } from "@/shared/enrolment/enrolment-context"
 import { useLearning } from "@/shared/learning/learning-context"
 import { adminCourseStatus } from "@/shared/data/mock-learning"
@@ -153,22 +154,17 @@ export function AdminCoursesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-heading text-2xl font-semibold tracking-tight">
-            Courses
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Build curriculum, publish modules, and assign them to cohorts.
-          </p>
-        </div>
+    <PageLayout
+      variant="standard"
+      title="Courses"
+      description="Build curriculum, publish modules, and assign them to cohorts."
+      actions={
         <Button size="lg" onClick={() => setCreateOpen(true)}>
           <PlusIcon data-icon="inline-start" />
           New course
         </Button>
-      </div>
-
+      }
+    >
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {overviewStats.map((stat) => (
           <div
@@ -477,6 +473,6 @@ export function AdminCoursesPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageLayout>
   )
 }

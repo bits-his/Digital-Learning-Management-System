@@ -6,21 +6,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 
 export function AdminSelectionAuditPage() {
   const { state } = useApplications()
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">
-          Selection audit trail
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Auditable record of scoring and selection decisions.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Audit trail"
+      description="Auditable record of scoring and selection decisions."
+    >
       <div className="overflow-hidden rounded-xl border">
         <Table>
           <TableHeader>
@@ -51,6 +48,6 @@ export function AdminSelectionAuditPage() {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </PageLayout>
   )
 }

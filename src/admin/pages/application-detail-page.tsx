@@ -15,6 +15,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useAuth } from "@/shared/auth/auth-context"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 import { DOCUMENT_LABELS } from "@/shared/data/applications/gamification"
 import type { CriterionScore } from "@/shared/data/applications/types"
@@ -60,22 +61,15 @@ export function AdminApplicationDetailPage() {
   const total = weightedScore({ ...app, scores })
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <Button variant="ghost" size="sm" className="mb-2 -ml-2" asChild>
-            <Link to="/admin/applications">← Queue</Link>
-          </Button>
-          <h1 className="font-heading text-2xl font-semibold">
-            {app.business.businessName}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {app.id} · {app.personal.fullName}
-          </p>
-        </div>
+    <PageLayout
+      variant="detail"
+      title={app.business.businessName || app.personal.fullName}
+      description={`${app.id} · ${app.personal.fullName}`}
+      back={{ to: "/admin/applications", label: "Queue" }}
+      actions={
         <Badge className="capitalize">{app.status.replaceAll("_", " ")}</Badge>
-      </div>
-
+      }
+    >
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
@@ -269,6 +263,6 @@ export function AdminApplicationDetailPage() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </PageLayout>
   )
 }

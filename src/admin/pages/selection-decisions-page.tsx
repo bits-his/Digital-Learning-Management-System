@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useAuth } from "@/shared/auth/auth-context"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 
 export function AdminSelectionDecisionsPage() {
@@ -23,15 +24,11 @@ export function AdminSelectionDecisionsPage() {
   )
 
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">
-          Selection decisions
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Shortlist, reject, approve — applicants are notified automatically.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Decisions"
+      description="Shortlist, reject, approve — applicants are notified automatically."
+    >
       <div className="flex flex-col gap-3">
         {actionable.map((app) => (
           <Card key={app.id}>
@@ -97,6 +94,6 @@ export function AdminSelectionDecisionsPage() {
           </Card>
         ))}
       </div>
-    </div>
+    </PageLayout>
   )
 }

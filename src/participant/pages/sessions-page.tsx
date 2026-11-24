@@ -9,17 +9,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { PageLayout } from "@/shared/components/page-layout"
 import { participantSessions } from "@/shared/data/mock-participant"
 
 export function ParticipantSessionsPage() {
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">Live sessions</h1>
-        <p className="text-sm text-muted-foreground">
-          Workshops, mentor hours, and networking events.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Live sessions"
+      description="Workshops, mentor hours, and networking events."
+    >
       <div className="flex flex-col gap-3">
         {participantSessions.map((session) => (
           <Card key={session.title}>
@@ -50,6 +49,6 @@ export function ParticipantSessionsPage() {
           </Card>
         ))}
       </div>
-    </div>
+    </PageLayout>
   )
 }

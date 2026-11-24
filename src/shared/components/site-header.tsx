@@ -14,7 +14,7 @@ export function SiteHeader({
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <SidebarTrigger className="-ml-1" />
         <div className="min-w-0">
-          <p className="truncate font-heading text-lg font-medium leading-tight">
+          <p className="truncate font-heading text-base font-medium leading-tight">
             {title}
           </p>
           {subtitle ? (

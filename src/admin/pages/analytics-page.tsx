@@ -11,6 +11,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { PageLayout } from "@/shared/components/page-layout"
 
 const metrics = [
   { label: "Enrollment", value: "128", detail: "Across 3 cohorts" },
@@ -21,13 +22,11 @@ const metrics = [
 
 export function AdminAnalyticsPage() {
   return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold">Analytics</h1>
-        <p className="text-sm text-muted-foreground">
-          Programme monitoring for leadership and funders.
-        </p>
-      </div>
+    <PageLayout
+      variant="standard"
+      title="Analytics"
+      description="Programme monitoring for leadership and funders."
+    >
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -81,6 +80,6 @@ export function AdminAnalyticsPage() {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
+    </PageLayout>
   )
 }

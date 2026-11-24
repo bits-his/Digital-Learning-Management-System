@@ -10,7 +10,7 @@ import {
 import { getPendingGrading } from "@/shared/data/mock-assessment"
 import { useAuth } from "@/shared/auth/auth-context"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -22,13 +22,12 @@ export function AdminDashboardPage() {
   const pendingGrades = getPendingGrading()
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow={`Welcome, ${user?.name.split(" ")[0]}`}
-        title="Run the programme by what’s urgent"
-        description="Applications, grading, and live sessions — ordered for action, not decoration."
-      />
-
+    <PageLayout
+      variant="story"
+      eyebrow={`Welcome, ${user?.name.split(" ")[0] ?? "Admin"}`}
+      title="Run the programme by what’s urgent"
+      description="Applications, grading, and live sessions — ordered for action, not decoration."
+    >
       {pendingGrades[0] ? (
         <NextMove
           label="Facilitator attention"
@@ -120,6 +119,6 @@ export function AdminDashboardPage() {
           </WorkList>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }

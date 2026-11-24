@@ -8,6 +8,7 @@ import {
 } from "@/applicant/components/application-stepper"
 import { FileDropzone } from "@/applicant/components/file-dropzone"
 import { FormSelect } from "@/applicant/components/form-select"
+import { PageLayout } from "@/shared/components/page-layout"
 import { Button } from "@/components/ui/button"
 import {
   Field,
@@ -147,19 +148,12 @@ export function ApplicantFormPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
-          Bootcamp application
-        </p>
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">
-          Complete your application
-        </h1>
-        <p className="text-muted-foreground">
-          About 10–15 minutes. Progress is saved after each step.
-        </p>
-      </div>
-
+    <PageLayout
+      variant="form"
+      eyebrow="Bootcamp application"
+      title="Complete your application"
+      description="About 10–15 minutes. Progress is saved after each step."
+    >
       <ApplicationStepper
         steps={steps}
         current={step}
@@ -643,6 +637,6 @@ export function ApplicantFormPage() {
           </div>
         </section>
       ) : null}
-    </div>
+    </PageLayout>
   )
 }

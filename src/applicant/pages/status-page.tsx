@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useAuth } from "@/shared/auth/auth-context"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   STATUS_LOOKUP_KEY,
   useApplications,
@@ -70,22 +71,17 @@ export function ApplicantStatusPage() {
   )
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
-          Application status
-        </p>
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">
-          {application.business.businessName || "Your application"}
-        </h1>
-        <p className="text-muted-foreground">
-          {application.id} · {application.personal.fullName}
-        </p>
-        <Badge className="mt-1 w-fit capitalize">
+    <PageLayout
+      variant="form"
+      eyebrow="Application status"
+      title={application.business.businessName || "Your application"}
+      description={`${application.id} · ${application.personal.fullName}`}
+      actions={
+        <Badge className="capitalize">
           {application.status.replaceAll("_", " ")}
         </Badge>
-      </div>
-
+      }
+    >
       <section className="flex flex-col gap-4 rounded-xl border p-5">
         <h2 className="font-heading text-lg font-semibold">Progress</h2>
         <div className="flex flex-col gap-3">
@@ -165,6 +161,6 @@ export function ApplicantStatusPage() {
           </Button>
         ) : null}
       </div>
-    </div>
+    </PageLayout>
   )
 }

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom"
 import { FileDropzone } from "@/applicant/components/file-dropzone"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/shared/auth/auth-context"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useApplications } from "@/shared/data/applications/applications-context"
 import {
+  DOCUMENT_HINTS,
   DOCUMENT_LABELS,
   REQUIRED_DOCUMENTS,
 } from "@/shared/data/applications/gamification"
@@ -23,15 +25,16 @@ export function ApplicantDocumentsPage() {
 
   if (!application) {
     return (
-      <div className="mx-auto flex max-w-lg flex-col gap-4 py-16 text-center">
-        <h1 className="font-heading text-2xl font-semibold">
-          No application draft
-        </h1>
-        <p className="text-muted-foreground">Create an application first.</p>
+      <PageLayout
+        variant="form"
+        title="No application draft"
+        description="Create an application first."
+        className="py-10 text-center"
+      >
         <Button className="mx-auto h-11 w-fit px-6" asChild>
           <Link to="/apply/form">Open form</Link>
         </Button>
-      </div>
+      </PageLayout>
     )
   }
 
@@ -40,15 +43,11 @@ export function ApplicantDocumentsPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">
-          Documents
-        </h1>
-        <p className="text-muted-foreground">
-          Upload or replace required application documents.
-        </p>
-      </div>
+    <PageLayout
+      variant="form"
+      title="Documents"
+      description="Upload or replace required application documents."
+    >
       <div className="flex flex-col gap-5">
         {REQUIRED_DOCUMENTS.map((type) => {
           const existing = application.documents.find(
@@ -58,6 +57,7 @@ export function ApplicantDocumentsPage() {
             <FileDropzone
               key={type}
               label={DOCUMENT_LABELS[type]}
+              hint={DOCUMENT_HINTS[type]}
               fileName={existing?.name}
               fileMeta={existing?.sizeLabel}
               onFile={(file) => handleUpload(type, file)}
@@ -73,6 +73,6 @@ export function ApplicantDocumentsPage() {
       <Button variant="outline" className="h-11 w-fit" asChild>
         <Link to="/apply/form">Back to application</Link>
       </Button>
-    </div>
+    </PageLayout>
   )
 }
