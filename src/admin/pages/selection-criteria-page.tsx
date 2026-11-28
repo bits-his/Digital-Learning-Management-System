@@ -29,11 +29,7 @@ export function AdminSelectionCriteriaPage() {
   const totalWeight = criteria.reduce((sum, item) => sum + item.weight, 0)
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Scoring criteria"
-      description="Configure weighted assessment criteria for selection."
-    >
+    <PageLayout variant="bare">
       <Card>
         <CardHeader>
           <CardTitle className="text-base">Rubric weights</CardTitle>

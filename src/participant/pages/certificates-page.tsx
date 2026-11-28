@@ -9,7 +9,7 @@ import {
 } from "@/shared/data/mock-certification"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -24,17 +24,7 @@ export function ParticipantCertificatesPage() {
   const cert = certificates[0]
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Certification"
-        title={
-          cert
-            ? "Your AAIIRI certificate is ready"
-            : "Earn your certificate with clear rules"
-        }
-        description="Completion is verified against programme rules, then issued with a unique code outsiders can check."
-      />
-
+    <PageLayout variant="bare">
       <JourneyRail
         steps={[
           { id: "rules", label: "Know rules", state: "done" },
@@ -77,18 +67,18 @@ export function ParticipantCertificatesPage() {
 
       {cert ? (
         <div className="overflow-hidden rounded-xl border border-foreground/10">
-          <div className="mesh-panel px-6 py-8 text-white md:px-10">
-            <p className="text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">
+          <div className="mesh-panel px-6 py-6 text-white md:px-8">
+            <p className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
               Certificate of completion
             </p>
-            <h2 className="mt-4 font-heading text-3xl font-semibold md:text-4xl">
+            <h2 className="mt-3 font-heading text-2xl font-semibold md:text-3xl">
               {cert.recipientName}
             </h2>
-            <p className="mt-2 text-white/80">{cert.businessName}</p>
-            <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/85">
+            <p className="mt-1 text-sm text-white/80">{cert.businessName}</p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85">
               {cert.programme}
             </p>
-            <div className="mt-8 flex flex-wrap gap-6 text-sm">
+            <div className="mt-6 flex flex-wrap gap-6 text-sm">
               <div>
                 <p className="text-white/60">Certificate No.</p>
                 <p className="font-medium">{cert.code}</p>
@@ -146,6 +136,6 @@ export function ParticipantCertificatesPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

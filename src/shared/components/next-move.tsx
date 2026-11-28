@@ -27,29 +27,23 @@ export function NextMove({
   return (
     <section
       className={cn(
-        "story-enter-delay relative overflow-hidden rounded-xl border border-foreground/10 bg-card/80 p-5 backdrop-blur-sm md:p-6",
+        "story-enter-delay relative overflow-hidden rounded-xl border border-foreground/10 bg-card/80 p-4 md:p-5",
         className
       )}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-8 -top-10 size-40 rounded-full bg-primary/10 blur-2xl"
-      />
-      <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+      <div className="relative flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-1">
+          <p className="text-[0.65rem] font-semibold tracking-[0.14em] text-primary uppercase">
             {label}
           </p>
-          <h2 className="font-heading text-2xl font-semibold text-balance">
+          <h2 className="font-heading text-lg font-semibold text-balance md:text-xl">
             {title}
           </h2>
-          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            {detail}
-          </p>
+          <p className="max-w-xl text-sm text-muted-foreground">{detail}</p>
         </div>
         {to ? (
           <Button
-            size="lg"
+            size="default"
             className={cn(
               "gap-2",
               tone === "attention" &&
@@ -64,7 +58,7 @@ export function NextMove({
           </Button>
         ) : (
           <Button
-            size="lg"
+            size="default"
             className={cn(
               "gap-2",
               tone === "attention" &&

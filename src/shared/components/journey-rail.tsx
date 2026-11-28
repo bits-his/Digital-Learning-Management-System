@@ -18,7 +18,7 @@ export function JourneyRail({
   return (
     <ol
       className={cn(
-        "story-enter-late grid gap-2 sm:grid-cols-4",
+        "story-enter-late grid gap-1.5 sm:grid-cols-4",
         className
       )}
       aria-label="Journey progress"
@@ -27,7 +27,7 @@ export function JourneyRail({
         <li
           key={step.id}
           className={cn(
-            "relative flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm",
+            "relative flex items-center gap-2 rounded-md border px-2.5 py-1.5 text-xs sm:text-sm",
             step.state === "current" &&
               "border-primary/40 bg-primary/8 text-foreground",
             step.state === "done" &&
@@ -38,19 +38,19 @@ export function JourneyRail({
         >
           <span
             className={cn(
-              "flex size-7 shrink-0 items-center justify-center rounded-md text-xs font-semibold",
+              "flex size-5 shrink-0 items-center justify-center rounded text-[0.65rem] font-semibold sm:size-6",
               step.state === "current" && "bg-primary text-primary-foreground",
               step.state === "done" && "bg-success text-white",
               step.state === "upcoming" && "bg-foreground/10"
             )}
           >
             {step.state === "done" ? (
-              <CheckIcon className="size-3.5" />
+              <CheckIcon className="size-3" />
             ) : (
               index + 1
             )}
           </span>
-          <span className="font-medium leading-tight">{step.label}</span>
+          <span className="truncate font-medium leading-tight">{step.label}</span>
         </li>
       ))}
     </ol>

@@ -13,7 +13,7 @@ import {
 import { participantCourseStatus } from "@/shared/data/mock-learning"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -39,18 +39,33 @@ export function ParticipantDashboardPage() {
     courses.find((course) => course.progress > 0 && course.progress < 100) ??
     courses[0]
   const nextSlot = publishedSlots[0]
+  const firstName = user?.name.split(" ")[0] ?? "there"
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow={`Hello, ${user?.name.split(" ")[0]}`}
-        title="Today is about one clear next step"
-        description={
-          cohort
-            ? `${cohort.name} · what should I do now, what’s due, and how am I tracking?`
-            : "Ignore the noise. This hub answers: what should I do now, what’s due, and how am I tracking?"
-        }
-      />
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="text-[0.65rem] font-medium tracking-[0.14em] text-primary uppercase">
+            Hello, {firstName}
+          </p>
+          <h1 className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
+            One clear next step
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {cohort
+              ? `${cohort.name} · what’s due and how you’re tracking`
+              : "What’s due, what’s next, and how you’re tracking"}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild size="sm" variant="outline">
+            <Link to="/participant/performance">Performance</Link>
+          </Button>
+          <Button asChild size="sm" variant="outline">
+            <Link to="/participant/mentorship">Mentorship</Link>
+          </Button>
+        </div>
+      </div>
 
       <JourneyRail
         steps={[
@@ -67,7 +82,7 @@ export function ParticipantDashboardPage() {
           {
             id: "mentor",
             label: "Mentor",
-            state: nextSession ? "current" : mentor ? "upcoming" : "upcoming",
+            state: nextSession ? "current" : "upcoming",
           },
           {
             id: "ready",
@@ -119,7 +134,12 @@ export function ParticipantDashboardPage() {
 
       <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-3">
-          <SectionLabel>Learning in motion</SectionLabel>
+          <div className="flex items-center justify-between gap-3">
+            <SectionLabel>Learning in motion</SectionLabel>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/participant/courses">All courses</Link>
+            </Button>
+          </div>
           {courses.length === 0 ? (
             <p className="rounded-xl border border-dashed px-4 py-8 text-sm text-muted-foreground">
               No published courses for your cohort yet.
@@ -150,12 +170,9 @@ export function ParticipantDashboardPage() {
               })}
             </WorkList>
           )}
-          <Button asChild variant="outline" size="sm" className="w-fit">
-            <Link to="/participant/courses">All courses</Link>
-          </Button>
         </div>
 
-        <div className="space-y-4 rounded-xl border border-foreground/10 bg-card/70 p-5 backdrop-blur-sm">
+        <div className="space-y-4 rounded-xl border border-foreground/10 bg-card/70 p-4">
           <SectionLabel>At a glance</SectionLabel>
           <HonestProgress
             label="Overall performance"
@@ -175,16 +192,8 @@ export function ParticipantDashboardPage() {
               </span>
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Button asChild size="sm">
-              <Link to="/participant/performance">Performance</Link>
-            </Button>
-            <Button asChild size="sm" variant="outline">
-              <Link to="/participant/mentorship">Mentorship</Link>
-            </Button>
-          </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }

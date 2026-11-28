@@ -13,7 +13,7 @@ import {
   type MentorProfile,
 } from "@/shared/data/mock-mentorship"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -64,17 +64,12 @@ export function AdminMentorsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Mentor network"
-        title="People who can carry a founder forward"
-        description="Profiles, expertise, and remaining capacity — before you allocate anyone."
-        action={
-          <Button size="lg" onClick={() => setShowCreate((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowCreate((v) => !v)}>
             {showCreate ? "Close" : "Add mentor"}
           </Button>
-        }
-      />
+      </div>
 
       <NextMove
         label="Capacity left"
@@ -172,6 +167,6 @@ export function AdminMentorsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

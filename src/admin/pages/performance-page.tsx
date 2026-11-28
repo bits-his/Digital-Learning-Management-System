@@ -1,6 +1,6 @@
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   ChartPanel,
   CohortOverallBarChart,
@@ -22,12 +22,8 @@ export function AdminPerformancePage() {
     .sort((a, b) => b.gap - a.gap || a.row.overallScore - b.row.overallScore)[0]
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Cohort evidence"
-        title="Who is behind — and on which competency?"
-        description="Programme view of performance records. Charts make gaps visible before you dig into names."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -89,6 +85,6 @@ export function AdminPerformancePage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

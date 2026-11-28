@@ -42,6 +42,7 @@ import {
   type LessonType,
   type QuizQuestion,
 } from "@/shared/data/mock-learning"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useEnrolment } from "@/shared/enrolment/enrolment-context"
 import { useLearning } from "@/shared/learning/learning-context"
 
@@ -167,12 +168,12 @@ export function AdminCourseDetailPage() {
 
   if (!course) {
     return (
-      <div className="flex flex-col gap-3">
-        <h1 className="font-heading text-2xl font-semibold">Course not found</h1>
+      <PageLayout variant="bare">
+        <p className="text-sm text-muted-foreground">Course not found.</p>
         <Button asChild variant="outline" size="sm" className="w-fit">
           <Link to="/admin/courses">Back to courses</Link>
         </Button>
-      </div>
+      </PageLayout>
     )
   }
 
@@ -293,7 +294,7 @@ export function AdminCourseDetailPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <PageLayout variant="bare">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button asChild variant="ghost" size="sm">
           <Link to="/admin/courses">
@@ -350,9 +351,9 @@ export function AdminCourseDetailPage() {
             <Badge variant="secondary" className="mb-3 w-fit">
               {status}
             </Badge>
-            <h1 className="font-heading text-2xl font-semibold tracking-tight md:text-3xl">
+            <p className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
               {course.title}
-            </h1>
+            </p>
             <p className="mt-2 max-w-xl text-sm text-white/80">
               {course.description}
             </p>
@@ -894,6 +895,6 @@ export function AdminCourseDetailPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </PageLayout>
   )
 }

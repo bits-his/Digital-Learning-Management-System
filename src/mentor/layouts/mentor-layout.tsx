@@ -33,9 +33,12 @@ export function MentorLayout() {
   return (
     <SidebarProvider>
       <MentorSidebar />
-      <SidebarInset className="bg-transparent">
+      <SidebarInset className="flex min-h-svh flex-col overflow-hidden bg-transparent">
         <SiteHeader title={meta.title} subtitle={meta.subtitle} />
-        <div className="flex flex-1 flex-col gap-4 p-4 md:p-8">
+        <div
+          data-slot="app-scroll"
+          className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-4 md:p-6"
+        >
           <Outlet />
         </div>
       </SidebarInset>

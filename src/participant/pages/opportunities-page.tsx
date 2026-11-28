@@ -14,7 +14,7 @@ import {
 } from "@/shared/data/mock-matchmaking"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -27,9 +27,9 @@ export function ParticipantOpportunitiesPage() {
   const [matches, setMatches] = React.useState<MatchRequest[]>(() =>
     enterprise ? getMatchesForEnterprise(enterprise.id) : []
   )
-  const [tab, setTab] = React.useState<"partners" | "requests" | "meetings" | "outcomes">(
-    "partners"
-  )
+  const [tab, setTab] = React.useState<
+    "partners" | "requests" | "meetings" | "outcomes"
+  >("partners")
 
   const meetings = enterprise
     ? getMeetingsForEnterprise(enterprise.businessName)
@@ -76,17 +76,7 @@ export function ParticipantOpportunitiesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Investor & buyer matchmaking"
-        title="Commercial opportunities for your business"
-        description={
-          eligible
-            ? "Browse partners, request intros, track meetings and outcomes."
-            : "Matchmaking unlocks when your readiness score clears the programme threshold."
-        }
-      />
-
+    <PageLayout variant="bare">
       <JourneyRail
         steps={[
           {
@@ -276,6 +266,6 @@ export function ParticipantOpportunitiesPage() {
           </WorkList>
         </div>
       ) : null}
-    </div>
+    </PageLayout>
   )
 }

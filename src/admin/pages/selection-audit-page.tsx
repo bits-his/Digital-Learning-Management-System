@@ -13,11 +13,7 @@ export function AdminSelectionAuditPage() {
   const { state } = useApplications()
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Audit trail"
-      description="Auditable record of scoring and selection decisions."
-    >
+    <PageLayout variant="bare">
       <div className="overflow-hidden rounded-xl border">
         <Table>
           <TableHeader>

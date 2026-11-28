@@ -14,7 +14,7 @@ import {
   type MentorshipAllocation,
 } from "@/shared/data/mock-mentorship"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -60,17 +60,12 @@ export function AdminAllocationsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Mentor ↔ participant"
-        title="Match people on purpose, not leftover capacity"
-        description="Every allocation needs a focus area. Capacity bars stop overloading mentors."
-        action={
-          <Button size="lg" onClick={() => setShowForm((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowForm((v) => !v)}>
             {showForm ? "Close" : "New allocation"}
           </Button>
-        }
-      />
+      </div>
 
       <NextMove
         title="Keep the matching story clean"
@@ -175,6 +170,6 @@ export function AdminAllocationsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

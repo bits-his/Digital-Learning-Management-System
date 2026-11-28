@@ -13,7 +13,7 @@ import {
 } from "@/shared/data/mock-matchmaking"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -54,16 +54,17 @@ export function ParticipantReadinessPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Business readiness"
-        title={`Readiness score ${score}`}
-        description={
-          enterprise
-            ? `${enterprise.businessName} — the evidence investors and buyers see before an intro is approved.`
-            : "Complete checklist items to unlock commercial matchmaking."
-        }
-      />
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          {enterprise
+            ? `${enterprise.businessName} · score ${score}/100`
+            : `Score ${score}/100 — unlock matchmaking at 75.`}
+        </p>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/participant/profile">Edit profile</Link>
+        </Button>
+      </div>
 
       <JourneyRail
         steps={[
@@ -147,9 +148,6 @@ export function ParticipantReadinessPage() {
               Weighted checklist — completed items count fully, in-progress
               count half.
             </p>
-            <Button asChild className="mt-4" variant="outline" size="sm">
-              <Link to="/participant/profile">Edit business profile</Link>
-            </Button>
           </div>
         </div>
       ) : null}
@@ -186,6 +184,6 @@ export function ParticipantReadinessPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

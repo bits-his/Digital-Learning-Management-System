@@ -18,7 +18,7 @@ import {
 import { enterpriseProfiles } from "@/shared/data/mock-matchmaking"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -78,19 +78,14 @@ export function AdminCertificationPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Certification"
-        title="Eligibility rules, verification, and issuance"
-        description="Certificates are earned against explicit rules — then issued with a unique code anyone can verify."
-        action={
-          <Button asChild size="lg" variant="outline">
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button asChild size="lg" variant="outline">
             <Link to="/verify" target="_blank" rel="noreferrer">
               Open public verify
             </Link>
           </Button>
-        }
-      />
+      </div>
 
       <JourneyRail
         steps={[
@@ -220,6 +215,6 @@ export function AdminCertificationPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

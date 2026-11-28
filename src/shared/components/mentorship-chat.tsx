@@ -50,7 +50,7 @@ export function MentorshipChat({
     getThreadMessages(allocationId)
   )
   const [draft, setDraft] = React.useState("")
-  const bottomRef = React.useRef<HTMLDivElement | null>(null)
+  const listRef = React.useRef<HTMLDivElement | null>(null)
   const textareaRef = React.useRef<HTMLTextAreaElement | null>(null)
 
   React.useEffect(() => {
@@ -66,7 +66,9 @@ export function MentorshipChat({
   }, [composeText, onComposeTextConsumed])
 
   React.useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    const list = listRef.current
+    if (!list) return
+    list.scrollTop = list.scrollHeight
   }, [messages])
 
   function send(body: string) {
@@ -93,17 +95,17 @@ export function MentorshipChat({
   return (
     <div
       className={cn(
-        "flex min-h-[28rem] flex-col overflow-hidden rounded-xl border border-foreground/10 bg-card/80 backdrop-blur-sm",
+        "flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-foreground/10 bg-card/80",
         className
       )}
     >
-      <div className="flex items-center gap-3 border-b border-foreground/8 px-4 py-3">
+      <div className="flex shrink-0 items-center gap-3 border-b border-foreground/8 px-4 py-2.5">
         <Avatar size="sm">
           <AvatarImage src={peerAvatar} alt={peerName} />
           <AvatarFallback>{initials(peerName)}</AvatarFallback>
         </Avatar>
         <div className="min-w-0">
-          <p className="truncate font-heading text-base font-medium">
+          <p className="truncate font-heading text-sm font-medium">
             {peerName}
           </p>
           <p className="truncate text-xs text-muted-foreground">
@@ -112,7 +114,10 @@ export function MentorshipChat({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
+      <div
+        ref={listRef}
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain p-4"
+      >
         {messages.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             No messages yet. Start the conversation below.
@@ -125,7 +130,7 @@ export function MentorshipChat({
                 key={message.id}
                 className={cn(
                   "flex max-w-[90%] flex-col gap-1 sm:max-w-[75%]",
-                  mine ? "self-end items-end" : "self-start items-start"
+                  mine ? "ml-auto items-end" : "mr-auto items-start"
                 )}
               >
                 <div className="flex items-center gap-2 text-[0.7rem] text-muted-foreground">
@@ -158,26 +163,27 @@ export function MentorshipChat({
             )
           })
         )}
-        <div ref={bottomRef} />
       </div>
 
       {promptChips.length > 0 ? (
-        <div className="flex flex-wrap gap-2 border-t border-foreground/8 px-4 py-2">
-          {promptChips.map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              className="rounded-full border border-foreground/10 bg-background/70 px-3 py-1 text-left text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground"
-              onClick={() => setDraft(chip + " ")}
-            >
-              {chip}
-            </button>
-          ))}
+        <div className="shrink-0 border-t border-foreground/8 px-3 py-2">
+          <div className="flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {promptChips.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                className="shrink-0 rounded-full border border-foreground/10 bg-background/70 px-3 py-1 text-xs whitespace-nowrap text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                onClick={() => setDraft(chip + " ")}
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
 
       <form
-        className="flex items-end gap-2 border-t border-foreground/8 p-3"
+        className="flex shrink-0 items-end gap-2 border-t border-foreground/8 p-3"
         onSubmit={(event) => {
           event.preventDefault()
           send(draft)
@@ -189,7 +195,7 @@ export function MentorshipChat({
           onChange={(event) => setDraft(event.target.value)}
           placeholder={placeholder}
           rows={2}
-          className="min-h-16 flex-1 resize-none rounded-lg border border-input bg-transparent px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="max-h-24 min-h-12 flex-1 resize-none rounded-lg border border-input bg-transparent px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
           onKeyDown={(event) => {
             if (event.key === "Enter" && !event.shiftKey) {
               event.preventDefault()
@@ -197,7 +203,7 @@ export function MentorshipChat({
             }
           }}
         />
-        <Button type="submit" size="lg" className="shrink-0 gap-2">
+        <Button type="submit" className="h-10 shrink-0 gap-2">
           <SendIcon className="size-4" />
           Send
         </Button>

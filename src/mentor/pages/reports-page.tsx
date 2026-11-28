@@ -16,7 +16,7 @@ import {
 } from "@/shared/data/mock-mentorship"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -63,12 +63,8 @@ export function MentorReportsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Mentor reports"
-        title="Turn conversations into programme signal"
-        description="Staff can’t support what they can’t see. Draft → submit → reviewed."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -224,6 +220,6 @@ export function MentorReportsPage() {
           })}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

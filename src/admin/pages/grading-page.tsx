@@ -15,7 +15,7 @@ import {
 } from "@/shared/data/mock-assessment"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -60,16 +60,8 @@ export function AdminGradingPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Facilitator inbox"
-        title={
-          pending.length
-            ? `${pending.length} submission${pending.length === 1 ? "" : "s"} waiting on you`
-            : "Grading inbox is clear"
-        }
-        description="Instructors ask one question on login: who needs my attention? Oldest pending work rises first."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -189,6 +181,6 @@ export function AdminGradingPage() {
           })}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

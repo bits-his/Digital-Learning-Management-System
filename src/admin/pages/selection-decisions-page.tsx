@@ -24,11 +24,7 @@ export function AdminSelectionDecisionsPage() {
   )
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Decisions"
-      description="Shortlist, reject, approve — applicants are notified automatically."
-    >
+    <PageLayout variant="bare">
       <div className="flex flex-col gap-3">
         {actionable.map((app) => (
           <Card key={app.id}>

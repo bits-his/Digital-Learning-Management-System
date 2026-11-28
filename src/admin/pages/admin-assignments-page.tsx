@@ -13,7 +13,7 @@ import {
   type Assignment,
 } from "@/shared/data/mock-assessment"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -53,17 +53,12 @@ export function AdminAssignmentsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Assignment bank"
-        title="Briefs with deadlines learners cannot miss"
-        description="Publish work that produces evidence. Cohort labels are references — enrolment stays with Learning."
-        action={
-          <Button size="lg" onClick={() => setShowCreate((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowCreate((v) => !v)}>
             {showCreate ? "Close" : "New assignment"}
           </Button>
-        }
-      />
+      </div>
 
       {draft ? (
         <NextMove
@@ -173,6 +168,6 @@ export function AdminAssignmentsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

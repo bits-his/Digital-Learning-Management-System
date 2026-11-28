@@ -13,7 +13,7 @@ import {
   type MatchMeeting,
 } from "@/shared/data/mock-matchmaking"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -58,17 +58,12 @@ export function AdminMatchMeetingsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Matchmaking meetings"
-        title={`${upcoming.length} commercial conversation${upcoming.length === 1 ? "" : "s"} scheduled`}
-        description="Schedule intros, capture attendance, and keep a record of what was discussed."
-        action={
-          <Button size="lg" onClick={() => setShowForm((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowForm((v) => !v)}>
             {showForm ? "Close" : "Schedule meeting"}
           </Button>
-        }
-      />
+      </div>
 
       {upcoming[0] ? (
         <NextMove
@@ -213,6 +208,6 @@ export function AdminMatchMeetingsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

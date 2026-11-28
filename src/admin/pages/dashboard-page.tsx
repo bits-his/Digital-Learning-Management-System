@@ -20,14 +20,24 @@ import {
 export function AdminDashboardPage() {
   const { user } = useAuth()
   const pendingGrades = getPendingGrading()
+  const firstName = user?.name.split(" ")[0] ?? "Admin"
 
   return (
-    <PageLayout
-      variant="story"
-      eyebrow={`Welcome, ${user?.name.split(" ")[0] ?? "Admin"}`}
-      title="Run the programme by what’s urgent"
-      description="Applications, grading, and live sessions — ordered for action, not decoration."
-    >
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          Welcome, {firstName} — applications, grading, and sessions.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild size="sm" variant="outline">
+            <Link to="/admin/applications">Applications</Link>
+          </Button>
+          <Button asChild size="sm" variant="outline">
+            <Link to="/admin/grading">Grading</Link>
+          </Button>
+        </div>
+      </div>
+
       {pendingGrades[0] ? (
         <NextMove
           label="Facilitator attention"
@@ -50,12 +60,12 @@ export function AdminDashboardPage() {
         {adminStats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-foreground/10 bg-card/70 p-4 backdrop-blur-sm"
+            className="rounded-xl border border-foreground/10 bg-card/70 p-4"
           >
-            <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
+            <p className="text-[0.65rem] tracking-[0.12em] text-muted-foreground uppercase">
               {stat.label}
             </p>
-            <p className="mt-2 font-heading text-3xl font-semibold">
+            <p className="mt-1.5 font-heading text-2xl font-semibold">
               {stat.value}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">{stat.hint}</p>
@@ -63,7 +73,7 @@ export function AdminDashboardPage() {
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <div className="space-y-3">
           <div className="flex items-center justify-between gap-3">
             <SectionLabel>Applications needing review</SectionLabel>

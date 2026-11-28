@@ -13,7 +13,7 @@ import {
   type MentorshipSession,
 } from "@/shared/data/mock-mentorship"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -63,17 +63,12 @@ export function AdminMentorshipSessionsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Mentorship calendar"
-        title={`${scheduled.length} session${scheduled.length === 1 ? "" : "s"} still open`}
-        description="Schedule, mark attendance outcomes, keep the relationship moving."
-        action={
-          <Button size="lg" onClick={() => setShowForm((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowForm((v) => !v)}>
             {showForm ? "Close" : "Schedule session"}
           </Button>
-        }
-      />
+      </div>
 
       <NextMove
         title="Mentors close the loop in their hub"
@@ -192,6 +187,6 @@ export function AdminMentorshipSessionsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

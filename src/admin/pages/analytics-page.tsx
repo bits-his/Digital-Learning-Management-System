@@ -22,11 +22,7 @@ const metrics = [
 
 export function AdminAnalyticsPage() {
   return (
-    <PageLayout
-      variant="standard"
-      title="Analytics"
-      description="Programme monitoring for leadership and funders."
-    >
+    <PageLayout variant="bare">
       <Tabs defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>

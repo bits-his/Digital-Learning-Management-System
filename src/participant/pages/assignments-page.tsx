@@ -12,7 +12,7 @@ import {
 } from "@/shared/data/mock-assessment"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -84,13 +84,7 @@ export function ParticipantAssignmentsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Assessment"
-        title="Assignments with a clear finish line"
-        description="One piece of evidence at a time. Open the brief, upload your file, then come back for scored feedback."
-      />
-
+    <PageLayout variant="bare">
       <JourneyRail
         steps={[
           { id: "brief", label: "Read brief", state: "done" },
@@ -247,6 +241,6 @@ export function ParticipantAssignmentsPage() {
           })}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

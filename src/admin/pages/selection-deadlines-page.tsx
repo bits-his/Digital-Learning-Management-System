@@ -39,11 +39,7 @@ export function AdminSelectionDeadlinesPage() {
   const open = Date.now() <= new Date(state.deadline.closeAt).getTime()
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Deadlines"
-      description="Manage the application window for the Bootcamp intake."
-    >
+    <PageLayout variant="bare">
 
       <Alert>
         <AlertTitle>{open ? "Window open" : "Window closed"}</AlertTitle>

@@ -13,7 +13,7 @@ import {
   type MatchOutcome,
 } from "@/shared/data/mock-matchmaking"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -71,17 +71,12 @@ export function AdminMatchOutcomesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Outcomes & follow-ups"
-        title="What happened after the introduction?"
-        description="Capture diligence, pilots, interest, or no-fit — then track the next commercial step."
-        action={
-          <Button size="lg" onClick={() => setShowForm((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowForm((v) => !v)}>
             {showForm ? "Close" : "Log outcome"}
           </Button>
-        }
-      />
+      </div>
 
       <NextMove
         label="Follow-up radar"
@@ -186,6 +181,6 @@ export function AdminMatchOutcomesPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

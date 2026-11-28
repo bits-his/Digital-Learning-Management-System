@@ -11,7 +11,7 @@ import {
 } from "@/shared/data/mock-assessment"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   ChartPanel,
   CompetencyBarChart,
@@ -33,18 +33,14 @@ export function ParticipantPerformancePage() {
 
   if (!performance) {
     return (
-      <div className="flex flex-col gap-4">
-        <PageIntro
-          title="Performance not ready yet"
-          description="Once you submit assessments, this page becomes your evidence board."
-        />
+      <PageLayout variant="bare">
         <NextMove
-          title="Start with an assignment"
+          title="Performance not ready yet"
           detail="Submit your first piece of work to unlock scored feedback here."
           cta="Go to assignments"
           to="/participant/assignments"
         />
-      </div>
+      </PageLayout>
     )
   }
 
@@ -53,12 +49,18 @@ export function ParticipantPerformancePage() {
     .sort((a, b) => a.score - b.score)[0]
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Your evidence board"
-        title={`Overall ${performance.overallScore} — with a clear denominator`}
-        description={`${performance.organization} · ${performance.cohort}. Scores only mean something when you can see what’s behind them.`}
-      />
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          {performance.organization} · {performance.cohort} · overall{" "}
+          <span className="font-medium text-foreground">
+            {performance.overallScore}
+          </span>
+        </p>
+        <Button asChild size="sm" variant="outline">
+          <Link to="/participant/assignments">Assignments</Link>
+        </Button>
+      </div>
 
       <JourneyRail
         steps={[
@@ -159,6 +161,6 @@ export function ParticipantPerformancePage() {
             ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

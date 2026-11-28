@@ -14,7 +14,7 @@ import {
   type PartnerType,
 } from "@/shared/data/mock-matchmaking"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -64,17 +64,12 @@ export function AdminPartnersPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Commercial partners"
-        title="Investor and buyer profiles"
-        description="Who can meet bootcamp enterprises — thesis, geography, and capacity. Mentors live under Mentorship, not here."
-        action={
-          <Button size="lg" onClick={() => setShowForm((v) => !v)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowForm((v) => !v)}>
             {showForm ? "Close" : "Add partner"}
           </Button>
-        }
-      />
+      </div>
 
       <NextMove
         label="Network health"
@@ -191,6 +186,6 @@ export function AdminPartnersPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

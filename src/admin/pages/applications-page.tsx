@@ -31,11 +31,8 @@ export function AdminApplicationsPage() {
   )
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Applications"
-      description="Screen, score, and progress applicants through selection."
-      actions={
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         <Select value={status} onValueChange={setStatus}>
           <SelectTrigger className="w-48">
             <SelectValue placeholder="Filter status" />
@@ -61,8 +58,8 @@ export function AdminApplicationsPage() {
             </SelectGroup>
           </SelectContent>
         </Select>
-      }
-    >
+      </div>
+
       <div className="flex flex-col gap-3">
         {filtered.map((app) => {
           const score = weightedScore(app)

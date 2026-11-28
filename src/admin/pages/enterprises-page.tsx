@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { enterpriseProfiles } from "@/shared/data/mock-matchmaking"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -17,12 +17,8 @@ export function AdminEnterprisesPage() {
   const blocked = enterpriseProfiles.filter((item) => !item.matchEligible)
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Enterprise / startup profiles"
-        title="Businesses ready — or not yet — for commercial intros"
-        description="Readiness, traction, and ask. Matchmaking only unlocks when eligibility clears."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -100,6 +96,6 @@ export function AdminEnterprisesPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

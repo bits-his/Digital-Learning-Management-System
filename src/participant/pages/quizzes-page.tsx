@@ -11,7 +11,7 @@ import {
 } from "@/shared/data/mock-assessment"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -93,17 +93,17 @@ export function ParticipantQuizzesPage() {
 
   if (activeQuiz) {
     return (
-      <div className="flex flex-col gap-6">
-        <PageIntro
-          eyebrow={`Question set · ${activeQuiz.durationMinutes} min`}
-          title={activeQuiz.title}
-          description={`Pass mark ${activeQuiz.passingScore}%. Choose one answer per question, then submit once.`}
-          action={
-            <Button variant="outline" onClick={() => setActiveQuizId(null)}>
-              Exit quiz
-            </Button>
-          }
-        />
+      <PageLayout
+        variant="standard"
+        eyebrow={`${activeQuiz.durationMinutes} min · pass ${activeQuiz.passingScore}%`}
+        title={activeQuiz.title}
+        description="Choose one answer per question, then submit once."
+        actions={
+          <Button variant="outline" size="sm" onClick={() => setActiveQuizId(null)}>
+            Exit quiz
+          </Button>
+        }
+      >
         <div className="space-y-4">
           {activeQuiz.questions.map((question, index) => (
             <div
@@ -113,7 +113,7 @@ export function ParticipantQuizzesPage() {
               <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">
                 Question {index + 1}
               </p>
-              <h2 className="mt-2 font-heading text-xl font-medium">
+              <h2 className="mt-2 font-heading text-lg font-medium">
                 {question.prompt}
               </h2>
               <div className="mt-4 grid gap-2">
@@ -146,18 +146,12 @@ export function ParticipantQuizzesPage() {
         <Button size="lg" className="w-fit" onClick={submitQuiz}>
           Submit answers
         </Button>
-      </div>
+      </PageLayout>
     )
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Assessment"
-        title="Quick checks that prove what you know"
-        description="Short quizzes after modules. You’ll see your score immediately — no mystery, no waiting."
-      />
-
+    <PageLayout variant="bare">
       <JourneyRail
         steps={[
           { id: "open", label: "Open quiz", state: "current" },
@@ -214,6 +208,6 @@ export function ParticipantQuizzesPage() {
           })}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

@@ -61,15 +61,13 @@ export function AdminApplicationDetailPage() {
   const total = weightedScore({ ...app, scores })
 
   return (
-    <PageLayout
-      variant="detail"
-      title={app.business.businessName || app.personal.fullName}
-      description={`${app.id} · ${app.personal.fullName}`}
-      back={{ to: "/admin/applications", label: "Queue" }}
-      actions={
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Button variant="ghost" size="sm" className="-ml-2 h-8 gap-1.5 px-2 text-muted-foreground" asChild>
+          <Link to="/admin/applications">← Queue</Link>
+        </Button>
         <Badge className="capitalize">{app.status.replaceAll("_", " ")}</Badge>
-      }
-    >
+      </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>

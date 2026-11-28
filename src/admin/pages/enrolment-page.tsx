@@ -35,6 +35,7 @@ import {
   nextEnrolmentAction,
   type EnrolmentCandidate,
 } from "@/shared/data/mock-enrolment"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useEnrolment } from "@/shared/enrolment/enrolment-context"
 
 type PipelineFilter =
@@ -332,16 +333,7 @@ export function AdminEnrolmentPage() {
     filtered.every((candidate) => selected.includes(candidate.id))
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="font-heading text-2xl font-semibold tracking-tight">
-          Enrolment
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Allocate cohorts and activate participant accounts.
-        </p>
-      </div>
-
+    <PageLayout variant="bare">
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((stat) => (
           <div
@@ -936,6 +928,6 @@ export function AdminEnrolmentPage() {
           ) : null}
         </SheetContent>
       </Sheet>
-    </div>
+    </PageLayout>
   )
 }

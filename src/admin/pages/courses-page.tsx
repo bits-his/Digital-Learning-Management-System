@@ -154,17 +154,13 @@ export function AdminCoursesPage() {
   }
 
   return (
-    <PageLayout
-      variant="standard"
-      title="Courses"
-      description="Build curriculum, publish modules, and assign them to cohorts."
-      actions={
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         <Button size="lg" onClick={() => setCreateOpen(true)}>
           <PlusIcon data-icon="inline-start" />
           New course
         </Button>
-      }
-    >
+      </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {overviewStats.map((stat) => (
           <div

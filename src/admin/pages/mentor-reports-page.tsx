@@ -7,7 +7,7 @@ import {
   type MentorReport,
 } from "@/shared/data/mock-mentorship"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -19,16 +19,8 @@ export function AdminMentorReportsPage() {
   const waiting = reports.filter((item) => item.status === "Submitted")
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Development signal"
-        title={
-          waiting.length
-            ? `${waiting.length} report${waiting.length === 1 ? "" : "s"} awaiting your review`
-            : "No mentor reports waiting"
-        }
-        description="Read what mentors observed, mark reviewed, then act in allocations or grading."
-      />
+    <PageLayout variant="bare">
+      
 
       {waiting[0] ? (
         <NextMove
@@ -110,6 +102,6 @@ export function AdminMentorReportsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

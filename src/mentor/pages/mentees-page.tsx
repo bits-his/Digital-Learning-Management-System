@@ -10,7 +10,7 @@ import {
 } from "@/shared/data/mock-mentorship"
 import { MentorshipChat } from "@/shared/components/mentorship-chat"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   HonestProgress,
   StatusLabel,
@@ -38,13 +38,7 @@ export function MentorMenteesPage() {
       .slice(0, 3) ?? []
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Coaching conversations"
-        title="Open a participant. Guide them. Answer their questions."
-        description="Mentorship is a dialogue — not a form. Pick a mentee, see where they’re weak, then coach in the thread."
-      />
-
+    <PageLayout variant="bare">
       {selected ? (
         <NextMove
           label="Active conversation"
@@ -176,6 +170,6 @@ export function MentorMenteesPage() {
           </aside>
         ) : null}
       </div>
-    </div>
+    </PageLayout>
   )
 }

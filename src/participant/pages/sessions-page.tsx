@@ -14,11 +14,7 @@ import { participantSessions } from "@/shared/data/mock-participant"
 
 export function ParticipantSessionsPage() {
   return (
-    <PageLayout
-      variant="standard"
-      title="Live sessions"
-      description="Workshops, mentor hours, and networking events."
-    >
+    <PageLayout variant="bare">
       <div className="flex flex-col gap-3">
         {participantSessions.map((session) => (
           <Card key={session.title}>

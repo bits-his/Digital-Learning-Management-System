@@ -12,7 +12,7 @@ import {
 } from "@/shared/data/mock-mentorship"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -53,12 +53,8 @@ export function MentorSessionsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Mentorship sessions"
-        title="Meet, capture, close the loop"
-        description="Every session should leave a note the participant can act on — not a blank calendar tile."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -172,6 +168,6 @@ export function MentorSessionsPage() {
           })}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

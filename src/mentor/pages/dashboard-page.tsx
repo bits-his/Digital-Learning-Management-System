@@ -10,7 +10,7 @@ import {
 } from "@/shared/data/mock-mentorship"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -30,14 +30,23 @@ export function MentorDashboardPage() {
   const pendingReports = getReportsForMentor(mentorId).filter(
     (item) => item.status === "Draft"
   )
+  const firstName = user?.name.split(" ")[0] ?? "Mentor"
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow={`Welcome, ${user?.name.split(" ")[0]}`}
-        title="Who needs you in the next 48 hours?"
-        description="Mentors don’t need another dashboard of vanity metrics. Lead with the next session, then unfinished reports."
-      />
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          Welcome, {firstName} — next session, then unfinished reports.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild size="sm" variant="outline">
+            <Link to="/mentor/mentees">Conversations</Link>
+          </Button>
+          <Button asChild size="sm" variant="outline">
+            <Link to="/mentor/sessions">Sessions</Link>
+          </Button>
+        </div>
+      </div>
 
       <JourneyRail
         steps={[
@@ -86,31 +95,24 @@ export function MentorDashboardPage() {
         />
       )}
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-foreground/10 bg-card/70 p-5">
-          <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
-            Active mentees
-          </p>
-          <p className="mt-2 font-heading text-4xl font-semibold">
-            {mentees.length}
-          </p>
-        </div>
-        <div className="rounded-xl border border-foreground/10 bg-card/70 p-5">
-          <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
-            Upcoming sessions
-          </p>
-          <p className="mt-2 font-heading text-4xl font-semibold">
-            {upcoming.length}
-          </p>
-        </div>
-        <div className="rounded-xl border border-foreground/10 bg-card/70 p-5">
-          <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
-            Draft reports
-          </p>
-          <p className="mt-2 font-heading text-4xl font-semibold">
-            {pendingReports.length}
-          </p>
-        </div>
+      <div className="grid gap-3 sm:grid-cols-3">
+        {[
+          { label: "Active mentees", value: mentees.length },
+          { label: "Upcoming sessions", value: upcoming.length },
+          { label: "Draft reports", value: pendingReports.length },
+        ].map((stat) => (
+          <div
+            key={stat.label}
+            className="rounded-xl border border-foreground/10 bg-card/70 p-4"
+          >
+            <p className="text-[0.65rem] tracking-[0.12em] text-muted-foreground uppercase">
+              {stat.label}
+            </p>
+            <p className="mt-1.5 font-heading text-2xl font-semibold">
+              {stat.value}
+            </p>
+          </div>
+        ))}
       </div>
 
       <div className="space-y-3">
@@ -132,12 +134,14 @@ export function MentorDashboardPage() {
                 key={session.id}
                 title={session.participantName}
                 meta={`${session.focus} · ${session.date} · ${session.time}`}
-                status={<StatusLabel tone="primary">{session.status}</StatusLabel>}
+                status={
+                  <StatusLabel tone="primary">{session.status}</StatusLabel>
+                }
               />
             ))
           )}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

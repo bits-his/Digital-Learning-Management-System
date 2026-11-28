@@ -50,6 +50,7 @@ import {
   type EnrolmentCandidate,
   type Facilitator,
 } from "@/shared/data/mock-enrolment"
+import { PageLayout } from "@/shared/components/page-layout"
 import { useLearning } from "@/shared/learning/learning-context"
 import { useEnrolment } from "@/shared/enrolment/enrolment-context"
 
@@ -542,16 +543,8 @@ export function AdminCohortsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-heading text-2xl font-semibold tracking-tight">
-            Cohorts
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Manage members, facilitators and programme timetables.
-          </p>
-        </div>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         <Button size="lg" onClick={() => setCreateOpen(true)}>
           <PlusIcon data-icon="inline-start" />
           New cohort
@@ -1899,6 +1892,6 @@ export function AdminCohortsPage() {
           </SheetFooter>
         </SheetContent>
       </Sheet>
-    </div>
+    </PageLayout>
   )
 }

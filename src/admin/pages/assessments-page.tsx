@@ -15,7 +15,7 @@ import {
 } from "@/shared/data/mock-assessment"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -66,17 +66,12 @@ export function AdminAssessmentsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Assessment design"
-        title="Publish checks that learners can finish in one sitting"
-        description="Catalogue of quizzes and exams. Draft quietly, publish when the pass mark and questions are honest."
-        action={
-          <Button size="lg" onClick={() => setShowCreate((value) => !value)}>
+    <PageLayout variant="bare">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        <Button size="lg" onClick={() => setShowCreate((value) => !value)}>
             {showCreate ? "Close form" : "New quiz"}
           </Button>
-        }
-      />
+      </div>
 
       <JourneyRail
         steps={[
@@ -198,6 +193,6 @@ export function AdminAssessmentsPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

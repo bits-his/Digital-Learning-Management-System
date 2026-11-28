@@ -57,6 +57,7 @@ import { ParticipantReadinessPage } from "@/participant/pages/readiness-page"
 import { ParticipantSessionsPage } from "@/participant/pages/sessions-page"
 import { ParticipantTimetablePage } from "@/participant/pages/timetable-page"
 import { RequireAuth } from "@/shared/auth/require-auth"
+import { ScrollToTop } from "@/shared/components/scroll-to-top"
 import { EnrolmentProvider } from "@/shared/enrolment/enrolment-context"
 import { LearningProvider } from "@/shared/learning/learning-context"
 import { LoginPage } from "@/shared/pages/login-page"
@@ -65,6 +66,7 @@ import { VerifyCertificatePage } from "@/shared/pages/verify-certificate-page"
 export function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <EnrolmentProvider>
         <LearningProvider>
           <Routes>

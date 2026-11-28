@@ -9,7 +9,7 @@ import {
 } from "@/shared/data/mock-matchmaking"
 import { JourneyRail } from "@/shared/components/journey-rail"
 import { NextMove, SectionLabel } from "@/shared/components/next-move"
-import { PageIntro } from "@/shared/components/page-intro"
+import { PageLayout } from "@/shared/components/page-layout"
 import {
   StatusLabel,
   WorkList,
@@ -44,12 +44,8 @@ export function AdminMatchmakingPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageIntro
-        eyebrow="Matching & recommendations"
-        title="Connect qualified businesses to the right capital or buyers"
-        description="System recommendations and participant requests flow here for review. Mentors are handled under Mentorship."
-      />
+    <PageLayout variant="bare">
+      
 
       <JourneyRail
         steps={[
@@ -184,6 +180,6 @@ export function AdminMatchmakingPage() {
           ))}
         </WorkList>
       </div>
-    </div>
+    </PageLayout>
   )
 }

@@ -13,11 +13,7 @@ import { adminSessions } from "@/shared/data/mock-admin"
 
 export function AdminSessionsPage() {
   return (
-    <PageLayout
-      variant="standard"
-      title="Live sessions"
-      description="Calendar, attendance, and join links."
-    >
+    <PageLayout variant="bare">
       <div className="flex flex-col gap-3">
         {adminSessions.map((session) => (
           <Card key={session.title}>
